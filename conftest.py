@@ -35,11 +35,3 @@ def setup_user_for_cleanup(register_new_user):
         yield payload
     finally:
         delete_user(user_token)
-
-# @pytest.fixture
-# def register_new_courier_with_used_login():
-#     payload = {
-#         "password": generate_random_string(10),
-#         "firstName": generate_random_string(10)
-#     }
-#     return payload

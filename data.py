@@ -9,3 +9,5 @@ class ResponseMessages:
     USER_CREATED_SUCCESS = True
     USER_LOGIN_ALREADY = "User already exists"
     USER_NOT_ENOUGH_DATA = "Email, password and name are required fields"
+    USER_LOGIN_SUCCESS = True
+    USER_DATA_INCORRECT = "email or password are incorrect"
