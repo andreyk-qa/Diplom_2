@@ -23,11 +23,11 @@ class TestCreateUser:
     @allure.title("Проверка создания пользователя, который уже зарегистрирован")
     @allure.description("Проверяется, что при использовании данных уже созданного ранее пользователя, система не даст создать его повторно.")
     def test_repeated_creation_user(self, setup_user_for_cleanup):
-        payload = setup_user_for_cleanup
+        payload, access_token = setup_user_for_cleanup
         with allure.step(f"Отправить повторный POST-запрос на создание пользователя по адресу {Url.MAIN_URL}{Url.CREATE_USER} с почтой '{payload['email']}'"):
             response = requests.post(
                 f'{Url.MAIN_URL}{Url.CREATE_USER}',
-                json=setup_user_for_cleanup
+                json=payload
             )
         with allure.step("Проверить код ответа 403 и сообщение об ошибке"):
             assert response.status_code == 403

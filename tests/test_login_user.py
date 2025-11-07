@@ -9,7 +9,7 @@ class TestLoginUser:
     @allure.title("Проверка авторизации пользователя")
     @allure.description("Проверяется, что при передаче данных зарегистрированного пользователя, пользователь успешно авторизуется. По окончанию проверки задействуется код очистки данных.")
     def test_successful_authorization_user(self, setup_user_for_cleanup):
-        payload = setup_user_for_cleanup
+        payload, _ = setup_user_for_cleanup
         with allure.step(f"Отправить POST-запрос на авторизацию пользователя по адресу {Url.MAIN_URL}{Url.LOGIN_USER} с почтой '{payload['email']}' и паролем"):
             response_auth = requests.post(
                 f'{Url.MAIN_URL}{Url.LOGIN_USER}',
@@ -24,7 +24,7 @@ class TestLoginUser:
         "Проверяется, что при передаче неверного обязательного поля (почта/пароль), система возвращает код 401.")
     @pytest.mark.parametrize("wrong_field", ["email", "password"])
     def test_authorization_user_with_wrong_required_fields(self, setup_user_for_cleanup, wrong_field):
-        payload = setup_user_for_cleanup
+        payload, _ = setup_user_for_cleanup
         auth_data = {
             "email": payload["email"],
             "password": payload["password"]

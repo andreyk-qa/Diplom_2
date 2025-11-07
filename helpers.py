@@ -12,7 +12,7 @@ def get_user_access_token(payload):
     try:
         login_response = requests.post(
             f'{Url.MAIN_URL}{Url.LOGIN_USER}',
-            json={"email": payload["email"], "password": payload["password"], "name": payload["name"]},
+            json={"email": payload["email"], "password": payload["password"]},
         )
         if login_response.status_code == 200 and "accessToken" in login_response.json():
             return login_response.json()["accessToken"]
@@ -22,4 +22,7 @@ def get_user_access_token(payload):
 
 def delete_user(access_token):
     if access_token:
-        requests.delete(f'{Url.MAIN_URL}{Url.USER}')
+        headers = {
+            "Authorization": f"Bearer {access_token}"
+        }
+        requests.delete(f'{Url.MAIN_URL}{Url.USER}', headers=headers)

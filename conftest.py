@@ -32,6 +32,6 @@ def setup_user_for_cleanup(register_new_user):
     requests.post(f'{Url.MAIN_URL}{Url.CREATE_USER}', json=payload)
     try:
         user_token = get_user_access_token(payload)
-        yield payload
+        yield payload, user_token
     finally:
         delete_user(user_token)
