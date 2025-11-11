@@ -63,11 +63,9 @@ class TestMainFunctionality:
         with allure.step("Получить начальное значение счетчика ингредиента"):
             initial_counter = main_page.get_ingredient_counter_value()
             allure.attach(f"Начальное значение счетчика: {initial_counter}", name="Initial Counter")
-            print(f"Начальное значение счетчика: {initial_counter}")
 
         with allure.step("Добавить ингредиент в конструктор"):
             main_page.add_ingredient_to_constructor()
-            print("Ингредиент добавлен в конструктор")
 
         with allure.step("Дождаться обновления счетчика ингредиента"):
             main_page.wait_for_ingredient_counter_update(expected_value=2, timeout=10)
@@ -75,7 +73,6 @@ class TestMainFunctionality:
         with allure.step("Получить значение счетчика после добавления"):
             final_counter = main_page.get_ingredient_counter_value()
             allure.attach(f"Конечное значение счетчика: {final_counter}", name="Final Counter")
-            print(f"Конечное значение счетчика: {final_counter}")
 
         with allure.step("Проверить, что счетчик увеличился"):
             assert final_counter > initial_counter
